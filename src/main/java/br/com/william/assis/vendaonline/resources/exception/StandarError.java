@@ -2,9 +2,9 @@ package br.com.william.assis.vendaonline.resources.exception;
 
 import java.io.Serializable;
 
-public class StandarError implements Serializable {
+    public class StandarError implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
     private Integer status;
     private String Msg;
