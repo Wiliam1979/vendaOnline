@@ -62,8 +62,11 @@ public class VendaonlineApplication implements CommandLineRunner {
         p1.getCategorias().addAll(Arrays.asList(cat1));
         p2.getCategorias().addAll(Arrays.asList(cat1,cat2));
         p3.getCategorias().addAll(Arrays.asList(cat1));
+
         est1.getCidades().addAll(Arrays.asList(c1));
         est2.getCidades().addAll(Arrays.asList(c2, c3));
+
+
 
 
         categoriaRepositore.saveAll(Arrays.asList(cat1, cat2));
