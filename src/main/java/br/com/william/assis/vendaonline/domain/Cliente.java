@@ -1,6 +1,7 @@
 package br.com.william.assis.vendaonline.domain;
 
 import br.com.william.assis.vendaonline.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -18,6 +19,8 @@ public class Cliente implements Serializable {
     private String email;
     private String CnpjOuCpf;
     private Integer tipo;
+
+
 
     @OneToMany(mappedBy = "cliente" )
     private List<Endereco> enderecos = new ArrayList<>();

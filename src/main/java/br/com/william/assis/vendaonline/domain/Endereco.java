@@ -1,5 +1,8 @@
 package br.com.william.assis.vendaonline.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -18,6 +21,7 @@ public class Endereco implements Serializable {
     private String bairro;
     private String cep;
 
+    @JsonIgnore
      @ManyToOne
      @JoinColumn(name = "cliente_id")
     private Cliente cliente;
