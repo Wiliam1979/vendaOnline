@@ -1,6 +1,7 @@
 package br.com.william.assis.vendaonline.domain;
 
 import br.com.william.assis.vendaonline.domain.enums.TipoCliente;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Cliente implements Serializable {
     @CollectionTable(name = "TELEFONE")
     private Set<String> telefones = new HashSet<>();
 
+     @JsonIgnore
     @OneToMany(mappedBy = "cliente")
     private List<Pedido>pedidos = new ArrayList<>();
 

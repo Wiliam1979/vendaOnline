@@ -1,6 +1,7 @@
 package br.com.william.assis.vendaonline.domain;
 
 import br.com.william.assis.vendaonline.domain.enums.EstadoPagamento;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public abstract class Pagamento implements Serializable {
     private Integer id;
     private Integer estado;
 
+     @JsonIgnore
      @OneToOne
      @JoinColumn(name = "pedido_id")
      @MapsId
