@@ -1,6 +1,5 @@
 package br.com.william.assis.vendaonline.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
