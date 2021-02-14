@@ -4,8 +4,10 @@ import java.util.Optional;
 
 import br.com.william.assis.vendaonline.domain.Categoria;
 import br.com.william.assis.vendaonline.repositores.CategoriaRepositore;
+import br.com.william.assis.vendaonline.service.exception.DataIntegrityException;
 import br.com.william.assis.vendaonline.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,5 +30,18 @@ public class CategoriaService {
         find(obj.getId());
         return repo.save(obj);
     }
+
+     public void delete(Integer id){
+         find(id);
+         try{
+             repo.deleteById(id);
+         }
+         catch (DataIntegrityViolationException e){
+             throw new DataIntegrityException("Não e possivel excluir uma Categoria que possui  produtos");
+
+         }
+
+
+     }
 
 }
