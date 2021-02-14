@@ -1,5 +1,6 @@
 package br.com.william.assis.vendaonline.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import br.com.william.assis.vendaonline.domain.Categoria;
@@ -42,6 +43,13 @@ public class CategoriaService {
          }
 
 
+
+         }
+
+    public List<Categoria> findAll() {
+        return repo.findAll();
+
+    }
+
      }
 
-}
