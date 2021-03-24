@@ -5,10 +5,7 @@ import br.com.william.assis.vendaonline.domain.ItemPedido;
 import br.com.william.assis.vendaonline.domain.PagamentoComBoleto;
 import br.com.william.assis.vendaonline.domain.Pedido;
 import br.com.william.assis.vendaonline.domain.enums.EstadoPagamento;
-import br.com.william.assis.vendaonline.repositores.ItemPedidoRepositores;
-import br.com.william.assis.vendaonline.repositores.PagamentoRepositore;
-import br.com.william.assis.vendaonline.repositores.PedidoRepositore;
-import br.com.william.assis.vendaonline.repositores.ProdutoRepositore;
+import br.com.william.assis.vendaonline.repositores.*;
 import br.com.william.assis.vendaonline.service.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +35,9 @@ private ProdutoService produtoService;
 @Autowired
 private ItemPedidoRepositores itemPedidoRepositore;
 
+@Autowired
+private ClienteService clienteService;
+
 
     public Pedido find(Integer id){
         Optional<Pedido> obj = pedidoRepositore.findById(id);
@@ -49,6 +49,7 @@ private ItemPedidoRepositores itemPedidoRepositore;
     public Pedido insert(Pedido obj){
         obj.setId(null);
         obj.setInstante(new Date());
+        obj.setCliente(clienteService.find(obj.getCliente().getId()));
         obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
         obj.getPagamento().setPedido(obj);
         if (obj.getPagamento()instanceof PagamentoComBoleto){
@@ -59,10 +60,12 @@ private ItemPedidoRepositores itemPedidoRepositore;
         pagamentoRepositore.save(obj.getPagamento());
         for(ItemPedido ip : obj.getItens()){
             ip.setDesconto(0.0);
-            ip.setPreco(produtoService.find(ip.getProduto().getId()).getPreco());
+            ip.setProduto(produtoService.find(ip.getProduto().getId()));
+            ip.setPreco(ip.getProduto().getPreco());
             ip.setPedido(obj);
         }
         itemPedidoRepositore.saveAll(obj.getItens());
+        System.out.println(obj);
         return obj;
     }
 }
