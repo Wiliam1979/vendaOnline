@@ -1,6 +1,8 @@
 package br.com.william.assis.vendaonline.config;
 
 import br.com.william.assis.vendaonline.service.DBservice;
+import br.com.william.assis.vendaonline.service.EmailService;
+import br.com.william.assis.vendaonline.service.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,5 +22,9 @@ public class TesteConfig {
 
         dBservice.instantiateTestDataBase();
         return true;
+    }
+    @Bean
+    public EmailService emailService(){
+        return new MockEmailService();
     }
 }
